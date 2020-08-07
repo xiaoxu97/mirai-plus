@@ -4,10 +4,10 @@
     * 创建空的springboot项目并引用依赖。
     * 在启动类上加注解@EnableMiraiPlus。
 * ### 配置
-    * mirai.botName 机器人名字，多个机器人时用于区分。
-    * mirai.botQQ 机器人QQ。
-    * mirai.botPassword 机器人密码。
-    * mirai.deviceInfoPath 设备文件保存路径，需要每个机器人独立的路径。
+    * mirai-plus.botName 机器人名字，多个机器人时用于区分。
+    * mirai-plus.botQQ 机器人QQ。
+    * mirai-plus.botPassword 机器人密码。
+    * mirai-plus.deviceInfoPath 设备文件保存路径，需要每个机器人独立的路径。
 * ### 开始试用
     * 创建一个类并加入spring管理或在@EnableMiraiPlus注解中增加扫描包的路径。
     * 类上使用@MiraiPlusHandler注解。
