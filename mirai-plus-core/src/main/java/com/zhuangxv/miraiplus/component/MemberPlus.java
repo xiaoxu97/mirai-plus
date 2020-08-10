@@ -17,4 +17,8 @@ public class MemberPlus {
     protected Member getMember() {
         return member;
     }
+
+    public long getQQ() {
+        return this.member.getId();
+    }
 }

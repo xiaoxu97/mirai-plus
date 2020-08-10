@@ -20,4 +20,8 @@ public class GroupPlus {
         this.group.sendMessage(message);
     }
 
+    public MemberPlus getMemberPlus(long qq) {
+        return new MemberPlus(this.group.get(qq));
+    }
+
 }
