@@ -1,7 +1,9 @@
 package com.zhuangxv.miraiplus.component;
 
+import com.zhuangxv.miraiplus.annotation.MiraiPlusFriendMessageHandler;
 import com.zhuangxv.miraiplus.annotation.MiraiPlusGroupMessageHandler;
 import com.zhuangxv.miraiplus.annotation.MiraiPlusHandler;
+import com.zhuangxv.miraiplus.annotation.MiraiPlusTempMessageHandler;
 import com.zhuangxv.miraiplus.injector.ObjectInjector;
 import com.zhuangxv.miraiplus.pojo.HandlerMethod;
 import com.zhuangxv.miraiplus.util.MiraiPlusApplicationBeanContext;
@@ -9,6 +11,8 @@ import kotlin.coroutines.CoroutineContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.mamoe.mirai.BotFactory;
+import net.mamoe.mirai.contact.Contact;
+import net.mamoe.mirai.contact.Group;
 import net.mamoe.mirai.event.EventHandler;
 import net.mamoe.mirai.event.ListenerHost;
 import net.mamoe.mirai.event.SimpleListenerHost;
@@ -118,6 +122,52 @@ public class MiraiPlusMessageDispatcher extends SimpleListenerHost {
             }
             return miraiPlusGroupMessageHandler.regex().equals("none") || event.getMessage().contentToString().matches(miraiPlusGroupMessageHandler.regex());
         }).collect(Collectors.toSet());
+        this.handleMethod(handlerMethodSet, event.getGroup());
+    }
+
+    /**
+     * 处理私聊消息
+     * @param handlerMethodList 处理方法列表
+     * @param event 消息事件
+     */
+    private void handleFriendMessage(List<HandlerMethod> handlerMethodList, FriendMessageEvent event) {
+        Set<HandlerMethod> handlerMethodSet = handlerMethodList.stream().filter(handlerMethod -> {
+            if (!handlerMethod.getMethod().isAnnotationPresent(MiraiPlusFriendMessageHandler.class)) {
+                return false;
+            }
+            MiraiPlusFriendMessageHandler miraiPlusFriendMessageHandler = handlerMethod.getMethod().getAnnotation(MiraiPlusFriendMessageHandler.class);
+
+            if (miraiPlusFriendMessageHandler.senderId() != 0 && miraiPlusFriendMessageHandler.senderId() != event.getSender().getId()) {
+                return false;
+            }
+            return miraiPlusFriendMessageHandler.regex().equals("none") || event.getMessage().contentToString().matches(miraiPlusFriendMessageHandler.regex());
+        }).collect(Collectors.toSet());
+        this.handleMethod(handlerMethodSet, event.getSender());
+    }
+
+    /**
+     * 处理临时会话
+     * @param handlerMethodList 处理方法列表
+     * @param event 消息事件
+     */
+    private void handleTempMessage(List<HandlerMethod> handlerMethodList, TempMessageEvent event) {
+        Set<HandlerMethod> handlerMethodSet = handlerMethodList.stream().filter(handlerMethod -> {
+            if (!handlerMethod.getMethod().isAnnotationPresent(MiraiPlusTempMessageHandler.class)) {
+                return false;
+            }
+            MiraiPlusTempMessageHandler miraiPlusTempMessageHandler = handlerMethod.getMethod().getAnnotation(MiraiPlusTempMessageHandler.class);
+            if (miraiPlusTempMessageHandler.groupId() != 0 && miraiPlusTempMessageHandler.groupId() != event.getGroup().getId()) {
+                return false;
+            }
+            if (miraiPlusTempMessageHandler.senderId() != 0 && miraiPlusTempMessageHandler.senderId() != event.getSender().getId()) {
+                return false;
+            }
+            return miraiPlusTempMessageHandler.regex().equals("none") || event.getMessage().contentToString().matches(miraiPlusTempMessageHandler.regex());
+        }).collect(Collectors.toSet());
+        this.handleMethod(handlerMethodSet, event.getSender());
+    }
+
+    private void handleMethod(Set<HandlerMethod> handlerMethodSet, Contact contact) {
         handlerMethodSet.forEach(handlerMethod -> {
             Class<?>[] parameterTypes = handlerMethod.getMethod().getParameterTypes();
             Object[] objects = new Object[parameterTypes.length];
@@ -134,31 +184,13 @@ public class MiraiPlusMessageDispatcher extends SimpleListenerHost {
                 Object result = handlerMethod.getMethod().invoke(handlerMethod.getObject(), objects);
                 if (result != null) {
                     if (result instanceof MessagePlus) {
-                        event.getGroup().sendMessage(((MessagePlus) result).getMessageChain());
+                        contact.sendMessage(((MessagePlus) result).getMessageChain());
                     }
                 }
             } catch (IllegalAccessException | InvocationTargetException e) {
                 log.error(e.getMessage(), e);
             }
         });
-    }
-
-    /**
-     * 处理私聊消息
-     * @param handlerMethodList 处理方法列表
-     * @param event 消息事件
-     */
-    private void handleFriendMessage(List<HandlerMethod> handlerMethodList, FriendMessageEvent event) {
-
-    }
-
-    /**
-     * 处理临时会话
-     * @param handlerMethodList 处理方法列表
-     * @param event 消息事件
-     */
-    private void handleTempMessage(List<HandlerMethod> handlerMethodList, TempMessageEvent event) {
-
     }
 
 }

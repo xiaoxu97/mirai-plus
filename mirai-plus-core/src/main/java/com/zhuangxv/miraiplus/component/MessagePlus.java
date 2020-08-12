@@ -2,6 +2,7 @@ package com.zhuangxv.miraiplus.component;
 
 import com.zhuangxv.miraiplus.enums.FacePlus;
 import com.zhuangxv.miraiplus.exception.MiraiPlusException;
+import net.mamoe.mirai.message.GroupMessageEvent;
 import net.mamoe.mirai.message.MessageEvent;
 import net.mamoe.mirai.message.data.*;
 
@@ -24,6 +25,15 @@ public class MessagePlus {
 
     public MessagePlus at(MemberPlus memberPlus) {
         this.messageChainBuilder.add(new At(memberPlus.getMember()));
+        return this;
+    }
+
+    public MessagePlus at(long qq) {
+        MessageEvent event = MiraiPlusThreadLocal.messageEvent.get();
+        if (!(event instanceof GroupMessageEvent)) {
+            throw new MiraiPlusException(999, "不支持的消息类型");
+        }
+        this.messageChainBuilder.add(new At(((GroupMessageEvent) event).getGroup().get(qq)));
         return this;
     }
 

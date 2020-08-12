@@ -14,4 +14,8 @@ public class FriendPlus {
         this.friend = friend;
     }
 
+    public long getQQ() {
+        return this.friend.getId();
+    }
+
 }

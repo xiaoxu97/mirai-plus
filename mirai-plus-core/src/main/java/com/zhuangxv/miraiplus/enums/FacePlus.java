@@ -1,7 +1,8 @@
 package com.zhuangxv.miraiplus.enums;
 
 public enum FacePlus {
-    jingya(0, "惊讶");
+    jingya(0, "惊讶"),
+    piezui(1, "撇嘴");
 
     private final int faceId;
 
