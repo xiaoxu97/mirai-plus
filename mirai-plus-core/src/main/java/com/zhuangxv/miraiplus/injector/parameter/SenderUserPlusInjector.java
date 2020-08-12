@@ -1,5 +1,6 @@
 package com.zhuangxv.miraiplus.injector.parameter;
 
+import com.zhuangxv.miraiplus.component.MiraiPlusThreadLocal;
 import com.zhuangxv.miraiplus.component.PlusObjectFactory;
 import com.zhuangxv.miraiplus.component.UserPlus;
 import com.zhuangxv.miraiplus.injector.ObjectInjector;
@@ -12,7 +13,8 @@ public class SenderUserPlusInjector implements ObjectInjector<UserPlus> {
     }
 
     @Override
-    public UserPlus getObject(MessageEvent event) {
+    public UserPlus getObject() {
+        MessageEvent event = MiraiPlusThreadLocal.messageEvent.get();
         return PlusObjectFactory.getUserPlus(event.getSender());
     }
 }

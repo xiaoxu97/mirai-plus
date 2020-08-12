@@ -5,6 +5,7 @@ import net.mamoe.mirai.contact.Friend;
 import net.mamoe.mirai.contact.Group;
 import net.mamoe.mirai.contact.Member;
 import net.mamoe.mirai.contact.User;
+import net.mamoe.mirai.message.data.MessageChain;
 
 public class PlusObjectFactory {
 
@@ -26,6 +27,10 @@ public class PlusObjectFactory {
 
     public static GroupPlus getGroupPlus(Group group) {
         return new GroupPlus(group);
+    }
+
+    public static MessagePlus getMessagePlus(MessageChain messages) {
+        return new MessagePlus(messages);
     }
 
 }

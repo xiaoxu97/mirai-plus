@@ -1,6 +1,7 @@
 package com.zhuangxv.miraiplus.injector.parameter;
 
 import com.zhuangxv.miraiplus.component.GroupPlus;
+import com.zhuangxv.miraiplus.component.MiraiPlusThreadLocal;
 import com.zhuangxv.miraiplus.component.PlusObjectFactory;
 import com.zhuangxv.miraiplus.injector.ObjectInjector;
 import net.mamoe.mirai.message.GroupMessageEvent;
@@ -13,7 +14,8 @@ public class GroupPlusInjector implements ObjectInjector<GroupPlus> {
     }
 
     @Override
-    public GroupPlus getObject(MessageEvent event) {
+    public GroupPlus getObject() {
+        MessageEvent event = MiraiPlusThreadLocal.messageEvent.get();
         if (!(event instanceof GroupMessageEvent)) {
             return null;
         }

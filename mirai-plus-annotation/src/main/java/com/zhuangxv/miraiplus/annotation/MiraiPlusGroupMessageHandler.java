@@ -26,4 +26,9 @@ public @interface MiraiPlusGroupMessageHandler {
      */
     long senderId() default 0;
 
+    /**
+     * 是否被@
+     */
+    boolean isAt() default false;
+
 }

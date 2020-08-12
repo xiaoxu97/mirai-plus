@@ -78,22 +78,24 @@ public class MiraiPlusMessageDispatcher extends SimpleListenerHost {
     public void handle(MessageEvent event) {
         BotPlus botPlus = BotPlusFactory.getBotPlus(event.getBot().getId());
         if (botPlus == null) {
+
             return;
         }
         List<HandlerMethod> handlerMethodList = this.handlerMethodMap.get(botPlus.getBotName());
         if (handlerMethodList == null || handlerMethodList.isEmpty()) {
             return;
         }
-        if (event instanceof GroupMessageEvent) {
-            this.handleGroupMessage(handlerMethodList, (GroupMessageEvent) event);
-            return;
-        }
-        if (event instanceof FriendMessageEvent) {
-            this.handleFriendMessage(handlerMethodList, (FriendMessageEvent) event);
-            return;
-        }
-        if (event instanceof TempMessageEvent) {
-            this.handleTempMessage(handlerMethodList, (TempMessageEvent) event);
+        MiraiPlusThreadLocal.messageEvent.set(event);
+        try {
+            if (event instanceof GroupMessageEvent) {
+                this.handleGroupMessage(handlerMethodList, (GroupMessageEvent) event);
+            } else if (event instanceof FriendMessageEvent) {
+                this.handleFriendMessage(handlerMethodList, (FriendMessageEvent) event);
+            } else if (event instanceof TempMessageEvent) {
+                this.handleTempMessage(handlerMethodList, (TempMessageEvent) event);
+            }
+        } finally {
+            MiraiPlusThreadLocal.messageEvent.remove();
         }
     }
 
@@ -125,7 +127,7 @@ public class MiraiPlusMessageDispatcher extends SimpleListenerHost {
                 if (objectInjector == null) {
                     objects[i] = null;
                 } else {
-                    objects[i] = objectInjector.getObject(event);
+                    objects[i] = objectInjector.getObject();
                 }
             }
             try {

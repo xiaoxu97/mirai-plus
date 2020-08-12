@@ -6,6 +6,6 @@ public interface ObjectInjector<T> {
 
     Class<T> getType();
 
-    T getObject(MessageEvent event);
+    T getObject();
 
 }
