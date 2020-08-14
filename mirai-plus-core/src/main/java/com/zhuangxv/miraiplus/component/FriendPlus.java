@@ -18,4 +18,8 @@ public class FriendPlus {
         return this.friend.getId();
     }
 
+    public void sendMessage(MessagePlus messagePlus) {
+        this.friend.sendMessage(messagePlus.getMessageChain());
+    }
+
 }

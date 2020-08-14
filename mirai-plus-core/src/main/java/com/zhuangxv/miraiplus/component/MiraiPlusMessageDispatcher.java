@@ -4,6 +4,7 @@ import com.zhuangxv.miraiplus.annotation.MiraiPlusFriendMessageHandler;
 import com.zhuangxv.miraiplus.annotation.MiraiPlusGroupMessageHandler;
 import com.zhuangxv.miraiplus.annotation.MiraiPlusHandler;
 import com.zhuangxv.miraiplus.annotation.MiraiPlusTempMessageHandler;
+import com.zhuangxv.miraiplus.exception.MiraiPlusException;
 import com.zhuangxv.miraiplus.injector.ObjectInjector;
 import com.zhuangxv.miraiplus.pojo.HandlerMethod;
 import com.zhuangxv.miraiplus.util.MiraiPlusApplicationBeanContext;
@@ -15,6 +16,7 @@ import net.mamoe.mirai.contact.Contact;
 import net.mamoe.mirai.contact.Group;
 import net.mamoe.mirai.event.EventHandler;
 import net.mamoe.mirai.event.ListenerHost;
+import net.mamoe.mirai.event.ListeningStatus;
 import net.mamoe.mirai.event.SimpleListenerHost;
 import net.mamoe.mirai.message.FriendMessageEvent;
 import net.mamoe.mirai.message.GroupMessageEvent;
@@ -75,19 +77,18 @@ public class MiraiPlusMessageDispatcher extends SimpleListenerHost {
 
     @Override
     public void handleException(@NotNull CoroutineContext context, @NotNull Throwable exception) {
-        super.handleException(context, exception);
+        throw new MiraiPlusException(999, exception.getMessage(), "{}", exception);
     }
 
     @EventHandler
-    public void handle(MessageEvent event) {
+    public ListeningStatus handle(MessageEvent event) {
         BotPlus botPlus = BotPlusFactory.getBotPlus(event.getBot().getId());
         if (botPlus == null) {
-
-            return;
+            return ListeningStatus.LISTENING;
         }
         List<HandlerMethod> handlerMethodList = this.handlerMethodMap.get(botPlus.getBotName());
         if (handlerMethodList == null || handlerMethodList.isEmpty()) {
-            return;
+            return ListeningStatus.LISTENING;
         }
         MiraiPlusThreadLocal.messageEvent.set(event);
         try {
@@ -101,6 +102,7 @@ public class MiraiPlusMessageDispatcher extends SimpleListenerHost {
         } finally {
             MiraiPlusThreadLocal.messageEvent.remove();
         }
+        return ListeningStatus.LISTENING;
     }
 
     /**

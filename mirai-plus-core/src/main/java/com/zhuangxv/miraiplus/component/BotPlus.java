@@ -21,11 +21,6 @@ public class BotPlus {
         this.bot = bot;
     }
 
-    public List<FriendPlus> getFriends() {
-        Collection<Friend> friends = this.bot.getFriends();
-        return friends.stream().map(FriendPlus::new).collect(Collectors.toList());
-    }
-
     public String getBotName() {
         return this.botName;
     }
@@ -37,4 +32,35 @@ public class BotPlus {
     public long getBotId() {
         return this.bot.getId();
     }
+
+    /**
+     * 获取机器人的好友列表
+     */
+    public List<FriendPlus> getFriends() {
+        return this.bot.getFriends().stream().map(FriendPlus::new).collect(Collectors.toList());
+    }
+
+    /**
+     * 获取机器人的某个好友
+     * @param qq 指定好友QQ号
+     */
+    public FriendPlus getFriend(long qq) {
+        return new FriendPlus(this.bot.getFriend(qq));
+    }
+
+    /**
+     * 获取机器人所在群列表
+     */
+    public List<GroupPlus> getGroups() {
+       return this.bot.getGroups().stream().map(GroupPlus::new).collect(Collectors.toList());
+    }
+
+    /**
+     * 获取机器人的指定群
+     * @param groupId 指定群号
+     */
+    public GroupPlus getGroup(long groupId) {
+        return new GroupPlus(this.bot.getGroup(groupId));
+    }
+
 }
