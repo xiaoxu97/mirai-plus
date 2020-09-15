@@ -1,6 +1,29 @@
 # MIRAI-PLUS
 ## ※本项目基于mirai进行java二次开发，旨在简化java用户的开发。
 ## 源地址https://github.com/mamoe/mirai
+### 许可证
+
+    Copyright (C) 2019-2020 Mamoe Technologies and contributors.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+`mirai-plus` 采用 `AGPLv3` 协议开源。为了整个社区的良性发展，我们**强烈建议**您做到以下几点：
+
+- **间接接触（包括但不限于使用 `Http API` 或 跨进程技术）到 `mirai-plus` 的软件使用 `AGPLv3` 开源**
+- **不鼓励，不支持一切商业使用**
+
+鉴于项目的特殊性，开发团队可能在任何时间**停止更新**或**删除项目**。
 * ### 使用前
     * clone并执行mvn clean install。
     * 创建空的springboot项目并引用依赖。
