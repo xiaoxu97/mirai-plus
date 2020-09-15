@@ -1,4 +1,6 @@
 # MIRAI-PLUS
+## ※本项目基于mirai进行java二次开发，主要为了简化java用户的开发。
+## 源地址https://github.com/mamoe/mirai
 * ### 使用前
     * clone并执行mvn clean install。
     * 创建空的springboot项目并引用依赖。
@@ -61,11 +63,20 @@
     * mirai-plus.deviceInfoPath 设备文件保存路径，需要每个机器人独立的路径。
 * ### 开始使用
     * 创建一个类并加入spring管理或在@EnableMiraiPlus注解中增加扫描包的路径。
-    * 类上使用@MiraiPlusHandler注解。
+    * 类上使用@MiraiPlusHandler注解，该注解有一个参数botName，用于区分多bot情况。
     * 对应方法加上@MiraiPlusHandler注解并加上需要解析的类型，如下：
         * @MiraiPlusGroupMessageHandler 监听群消息。
+            * regex 匹配改正则消息时触发该事件
+            * groupId 只有当收到消息的群号为该参数指定内容时，触发该事件，默认为0即不限制
+            * senderId 只有当发言人为该参数指定id时，触发该事件，默认为0即不限制
+            * isAt 是否被艾特，如果为true则被艾特的消息才会触发该事件，反之不会触发。
         * @MiraiPlusFriendMessageHandler 监听私聊消息。
+            * regex 匹配改正则消息时触发该事件
+            * senderId 只有当发言人为该参数指定id时，触发该事件，默认为0即不限制
         * @MiraiPlusTempMessageHandler 监听临时会话。
+            * regex 匹配改正则消息时触发该事件
+            * groupId 只有当临时会话从该参数指定群聊发起时，触发该事件，默认为0即不限制
+            * senderId 只有当发言人为该参数指定id时，触发该事件，默认为0即不限制
         * 待补充。
     * 方法支持的参数列表：
         * BotPlus 将注入收到消息的机器人实例。
