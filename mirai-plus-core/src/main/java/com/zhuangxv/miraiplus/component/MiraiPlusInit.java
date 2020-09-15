@@ -52,6 +52,7 @@ public class MiraiPlusInit implements CommandLineRunner {
                     );
                     setBotLoggerSupplier(bot -> new MiraiPlusLog(String.valueOf(bot.getId())));
                     setNetworkLoggerSupplier(bot -> new MiraiPlusLog(bot.getId() + "-network"));
+                    setProtocol(MiraiProtocol.ANDROID_PHONE);
                 }
             });
             bot.login();

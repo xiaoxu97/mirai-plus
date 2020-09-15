@@ -2,6 +2,7 @@ package com.zhuangxv.miraiplus.component;
 
 import com.zhuangxv.miraiplus.enums.FacePlus;
 import com.zhuangxv.miraiplus.exception.MiraiPlusException;
+import net.mamoe.mirai.message.FriendMessageEvent;
 import net.mamoe.mirai.message.GroupMessageEvent;
 import net.mamoe.mirai.message.MessageEvent;
 import net.mamoe.mirai.message.data.*;
@@ -101,17 +102,29 @@ public class MessagePlus {
 
     private Image getImage(URL image) {
         MessageEvent event = MiraiPlusThreadLocal.messageEvent.get();
-        return event.getSender().uploadImage(image);
+        if (event instanceof GroupMessageEvent) {
+            return ((GroupMessageEvent) event).getGroup().uploadImage(image);
+        } else {
+            return event.getBot().getSelfQQ().uploadImage(image);
+        }
     }
 
     private Image getImage(File image) {
         MessageEvent event = MiraiPlusThreadLocal.messageEvent.get();
-        return event.getSender().uploadImage(image);
+        if (event instanceof GroupMessageEvent) {
+            return ((GroupMessageEvent) event).getGroup().uploadImage(image);
+        } else {
+            return event.getBot().getSelfQQ().uploadImage(image);
+        }
     }
 
     private Image getImage(InputStream image) {
         MessageEvent event = MiraiPlusThreadLocal.messageEvent.get();
-        return event.getSender().uploadImage(image);
+        if (event instanceof GroupMessageEvent) {
+            return ((GroupMessageEvent) event).getGroup().uploadImage(image);
+        } else {
+            return event.getBot().getSelfQQ().uploadImage(image);
+        }
     }
 
 }
