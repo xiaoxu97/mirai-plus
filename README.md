@@ -1,5 +1,5 @@
 # MIRAI-PLUS
-## ※本项目基于mirai进行java二次开发，主要为了简化java用户的开发。
+## ※本项目基于mirai进行java二次开发，旨在简化java用户的开发。
 ## 源地址https://github.com/mamoe/mirai
 * ### 使用前
     * clone并执行mvn clean install。
