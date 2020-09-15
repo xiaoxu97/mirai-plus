@@ -61,6 +61,7 @@
     * mirai-plus.botQQ 机器人QQ。
     * mirai-plus.botPassword 机器人密码。
     * mirai-plus.deviceInfoPath 设备文件保存路径，需要每个机器人独立的路径。
+    * 配置支持数组形式，以便支持多bot管理。
 * ### 开始使用
     * 创建一个类并加入spring管理或在@EnableMiraiPlus注解中增加扫描包的路径。
     * 类上使用@MiraiPlusHandler注解，该注解有一个参数botName，用于区分多bot情况。
