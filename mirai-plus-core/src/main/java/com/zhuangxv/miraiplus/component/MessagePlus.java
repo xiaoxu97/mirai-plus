@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MessagePlus {
 
@@ -93,6 +95,14 @@ public class MessagePlus {
 
     public String getString() {
         return this.messageChainBuilder.build().contentToString();
+    }
+
+    public List<ImagePlus> getImagePlus() {
+        return this.messageChainBuilder.stream().filter(v -> v instanceof Image).map(ImagePlus::new).collect(Collectors.toList());
+    }
+
+    public List<AtPlus> getAtPlus() {
+        return this.messageChainBuilder.stream().filter(v -> v instanceof At).map(AtPlus::new).collect(Collectors.toList());
     }
 
     protected MessageChain getMessageChain() {

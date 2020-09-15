@@ -18,6 +18,14 @@ public class FriendPlus {
         return this.friend.getId();
     }
 
+    public String getAvatarUrl() {
+        return this.friend.getAvatarUrl();
+    }
+
+    public String getNick() {
+        return this.friend.getNick();
+    }
+
     public void sendMessage(MessagePlus messagePlus) {
         this.friend.sendMessage(messagePlus.getMessageChain());
     }

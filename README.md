@@ -78,11 +78,46 @@
     * 方法支持的返回值列表：
         * void 什么也不做。
         * MessagePlus 回复对应消息。
-    * 构建MessagePlus:
-        * .at 增加艾特指定qq。
-        * .at 增加艾特指定会员，MemberPlus可通过GroupPlus.getMemberPlus获取。
-        * .atAll 增加艾特全体成员。
-        * .text 增加普通文本消息。
-        * .face 增加QQ内置表情，通过枚举类FacePlus构建
-        * .image 增加自定义图片，参数支持url文本，File对象，InputStream。
-        * .flashImage 增加闪图，参数支持url文本，File对象，InputStream。
+    * MessagePlus:
+        * at 增加艾特指定qq。
+        * at 增加艾特指定会员，MemberPlus可通过GroupPlus.getMemberPlus获取。
+        * atAll 增加艾特全体成员。
+        * text 增加普通文本消息。
+        * face 增加QQ内置表情，通过枚举类FacePlus构建
+        * image 增加自定义图片，参数支持url文本，File对象，InputStream。
+        * flashImage 增加闪图，参数支持url文本，File对象，InputStream。
+        * getAt 获取消息体中所有的艾特对象。
+        * getImage 获取消息体中所有的图片对象。
+    * 各个组件可进行的操作
+        * BotPlus 机器人对象
+            * getFriends 获取机器人的好友列表。
+            * getFriend 获取机器人的指定好友。
+            * getGroups 获取机器人所在的群列表。
+            * getGroup 获取机器人所在的指定群。
+        * FriendPlus 好友对象
+            * getQQ 获取该好友的QQ号。
+            * getAvatarUrl 获取该好友的头像图片地址。
+            * getNick 获取该好友的昵称。
+            * sendMessage 给该好友发送消息。
+        * GroupPlus 群对象
+            * getId 获取群号。
+            * getName 获取群名称。
+            * getAvatarUrl 获取群头像地址。
+            * getOwner 获取群主。
+            * sendMessage 发送消息。
+            * getMemberPlus 获取指定群成员。
+            * getMemberPlusList 获取全部群成员。
+        * MemberPlus 群成员对象
+            * getQQ 获取该成员QQ号。
+            * getNameCard 获取该成员群名片。
+            * getPermission 获取该成员权限 0代表一般成员 1代表管理员 2代表群主。
+            * getSpecialTitle 获取该成员头衔。
+            * getMuteTimeRemaining 获取该成员被禁言剩余时长。
+            * mute 设置该成员禁言。
+            * unMute 解除该成员禁言。
+            * kick 将该成员提出群聊（可以附加消息）。
+            * sendMessage 向该成员发送消息，若群成员同时是好友, 则会发送好友消息. 否则发送临时会话消息。
+        * AtPlus 艾特对象
+            * getMemberPlus 获取被艾特的群成员对象。
+        * ImagePlus 图片对象
+            * getImageUrl 获取该图片的url地址。

@@ -66,6 +66,12 @@
             </dependency>
 
             <dependency>
+                <groupId>net.mamoe</groupId>
+                <artifactId>mirai-core</artifactId>
+                <version>${mirai.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-stdlib-common</artifactId>
                 <version>${kotlin.version}</version>
