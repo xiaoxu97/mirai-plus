@@ -2,7 +2,6 @@ package com.zhuangxv.miraiplus.component;
 
 import com.zhuangxv.miraiplus.enums.FacePlus;
 import com.zhuangxv.miraiplus.exception.MiraiPlusException;
-import net.mamoe.mirai.message.FriendMessageEvent;
 import net.mamoe.mirai.message.GroupMessageEvent;
 import net.mamoe.mirai.message.MessageEvent;
 import net.mamoe.mirai.message.data.*;
