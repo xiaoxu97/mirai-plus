@@ -1,29 +1,20 @@
 package com.zhuangxv.miraiplus.component;
 
-import com.alibaba.fastjson.JSON;
-import com.zhuangxv.miraiplus.annotation.MiraiPlusHandler;
 import com.zhuangxv.miraiplus.config.MiraiPlusConfig;
 import com.zhuangxv.miraiplus.config.MiraiPlusConfigFactory;
-import com.zhuangxv.miraiplus.injector.ObjectInjector;
-import com.zhuangxv.miraiplus.util.MiraiPlusApplicationBeanContext;
 import kotlinx.serialization.json.Json;
-import kotlinx.serialization.json.JsonBuilder;
-import kotlinx.serialization.json.JsonConfiguration;
-import kotlinx.serialization.modules.SerialModule;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.BotFactoryJvm;
 import net.mamoe.mirai.event.Events;
 import net.mamoe.mirai.utils.BotConfiguration;
-import net.mamoe.mirai.utils.SystemDeviceInfo;
 import net.mamoe.mirai.utils.SystemDeviceInfoKt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 
 import java.io.File;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -48,7 +39,7 @@ public class MiraiPlusInit implements CommandLineRunner {
             Bot bot = BotFactoryJvm.newBot(v.getBotQQ(), v.getBotPassword(), new BotConfiguration() {
                 {
                     setDeviceInfo(context ->
-                            SystemDeviceInfoKt.loadAsDeviceInfo(new File(v.getDeviceInfoPath()), context)
+                            SystemDeviceInfoKt.loadAsDeviceInfo(new File(v.getDeviceInfoPath()), Json.Default, context)
                     );
                     setBotLoggerSupplier(bot -> new MiraiPlusLog(String.valueOf(bot.getId())));
                     setNetworkLoggerSupplier(bot -> new MiraiPlusLog(bot.getId() + "-network"));

@@ -11,11 +11,8 @@ import com.zhuangxv.miraiplus.util.MiraiPlusApplicationBeanContext;
 import kotlin.coroutines.CoroutineContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.mamoe.mirai.BotFactory;
 import net.mamoe.mirai.contact.Contact;
-import net.mamoe.mirai.contact.Group;
 import net.mamoe.mirai.event.EventHandler;
-import net.mamoe.mirai.event.ListenerHost;
 import net.mamoe.mirai.event.ListeningStatus;
 import net.mamoe.mirai.event.SimpleListenerHost;
 import net.mamoe.mirai.message.FriendMessageEvent;
@@ -25,8 +22,6 @@ import net.mamoe.mirai.message.TempMessageEvent;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.PostConstruct;
-import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -107,8 +102,9 @@ public class MiraiPlusMessageDispatcher extends SimpleListenerHost {
 
     /**
      * 处理群聊消息
+     *
      * @param handlerMethodList 处理方法列表
-     * @param event 消息事件
+     * @param event             消息事件
      */
     private void handleGroupMessage(List<HandlerMethod> handlerMethodList, GroupMessageEvent event) {
         Set<HandlerMethod> handlerMethodSet = handlerMethodList.stream().filter(handlerMethod -> {
@@ -129,8 +125,9 @@ public class MiraiPlusMessageDispatcher extends SimpleListenerHost {
 
     /**
      * 处理私聊消息
+     *
      * @param handlerMethodList 处理方法列表
-     * @param event 消息事件
+     * @param event             消息事件
      */
     private void handleFriendMessage(List<HandlerMethod> handlerMethodList, FriendMessageEvent event) {
         Set<HandlerMethod> handlerMethodSet = handlerMethodList.stream().filter(handlerMethod -> {
@@ -149,8 +146,9 @@ public class MiraiPlusMessageDispatcher extends SimpleListenerHost {
 
     /**
      * 处理临时会话
+     *
      * @param handlerMethodList 处理方法列表
-     * @param event 消息事件
+     * @param event             消息事件
      */
     private void handleTempMessage(List<HandlerMethod> handlerMethodList, TempMessageEvent event) {
         Set<HandlerMethod> handlerMethodSet = handlerMethodList.stream().filter(handlerMethod -> {

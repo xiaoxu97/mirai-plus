@@ -3,12 +3,63 @@
     * clone并执行mvn clean install。
     * 创建空的springboot项目并引用依赖。
     * 在启动类上加注解@EnableMiraiPlus。
+    * 注意，由于kotlin版本依赖关系，需要你使用继承方式依赖mirai-plus
+        ```
+        <parent>
+            <groupId>com.zhuangxv</groupId>
+            <artifactId>mirai-plus-pom</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </parent>
+        ```
+        或者不以继承方式，但要排除依赖并指定版本。
+        ```
+        <dependency>
+            <groupId>com.zhuangxv</groupId>
+            <artifactId>mirai-plus</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>kotlin-stdlib</artifactId>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>kotlin-stdlib-common</artifactId>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>kotlin-stdlib-jdk7</artifactId>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-common</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk7</artifactId>
+            <version>1.4.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>kotlin-stdlib</artifactId>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        ```
 * ### 配置
     * mirai-plus.botName 机器人名字，多个机器人时用于区分。
     * mirai-plus.botQQ 机器人QQ。
     * mirai-plus.botPassword 机器人密码。
     * mirai-plus.deviceInfoPath 设备文件保存路径，需要每个机器人独立的路径。
-* ### 开始试用
+* ### 开始使用
     * 创建一个类并加入spring管理或在@EnableMiraiPlus注解中增加扫描包的路径。
     * 类上使用@MiraiPlusHandler注解。
     * 对应方法加上@MiraiPlusHandler注解并加上需要解析的类型，如下：

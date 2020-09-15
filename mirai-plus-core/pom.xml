@@ -13,22 +13,10 @@
 
     <artifactId>mirai-plus-core</artifactId>
 
-    <repositories>
-        <repository>
-            <id>jcenter</id>
-            <url>https://jcenter.bintray.com/</url>
-        </repository>
-    </repositories>
-
-    <properties>
-        <springBoot.version>2.1.3.RELEASE</springBoot.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.zhuangxv</groupId>
             <artifactId>mirai-plus-annotation</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -49,7 +37,6 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.52</version>
         </dependency>
 
         <dependency>
@@ -60,39 +47,6 @@
         <dependency>
             <groupId>net.mamoe</groupId>
             <artifactId>mirai-core-qqandroid</artifactId>
-            <version>1.0.4</version> <!-- 替换版本为最新版本 -->
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jetbrains.kotlin</groupId>
-                    <artifactId>kotlin-stdlib</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jetbrains.kotlin</groupId>
-                    <artifactId>kotlin-stdlib-common</artifactId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>atomicfu</artifactId>
-                    <groupId>org.jetbrains.kotlinx</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>atomicfu-common</artifactId>
-                    <groupId>org.jetbrains.kotlinx</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>kotlinx-coroutines-core</artifactId>
-                    <groupId>org.jetbrains.kotlinx</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>kotlinx-coroutines-core-common</artifactId>
-                    <groupId>org.jetbrains.kotlinx</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jetbrains.kotlinx</groupId>
-            <artifactId>atomicfu</artifactId>
-            <version>0.14.2</version>
             <exclusions>
                 <exclusion>
                     <artifactId>kotlin-stdlib</artifactId>
@@ -102,67 +56,60 @@
                     <artifactId>kotlin-stdlib-common</artifactId>
                     <groupId>org.jetbrains.kotlin</groupId>
                 </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jetbrains.kotlinx</groupId>
-            <artifactId>atomicfu-common</artifactId>
-            <version>0.14.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jetbrains.kotlinx</groupId>
-            <artifactId>kotlinx-coroutines-core</artifactId>
-            <version>1.3.7</version>
-            <exclusions>
                 <exclusion>
-                    <artifactId>kotlin-stdlib</artifactId>
-                    <groupId>org.jetbrains.kotlin</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>kotlin-stdlib-common</artifactId>
+                    <artifactId>kotlin-stdlib-jdk7</artifactId>
                     <groupId>org.jetbrains.kotlin</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jetbrains.kotlinx</groupId>
-            <artifactId>kotlinx-coroutines-core-common</artifactId>
-            <version>1.3.7</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>kotlin-stdlib-common</artifactId>
-                    <groupId>org.jetbrains.kotlin</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib</artifactId>
-            <version>1.3.72</version>
         </dependency>
 
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-common</artifactId>
-            <version>1.3.72</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk7</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>kotlin-stdlib</artifactId>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${springBoot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

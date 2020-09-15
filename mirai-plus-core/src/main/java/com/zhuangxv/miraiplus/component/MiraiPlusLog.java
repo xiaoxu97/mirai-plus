@@ -30,52 +30,52 @@ public class MiraiPlusLog extends PlatformLogger {
     }
 
     @Override
-    protected void info0(@Nullable String message) {
+    public void info0(@Nullable String message) {
         log.info(message);
     }
 
     @Override
-    protected void info0(@Nullable String message, @Nullable Throwable e) {
+    public void info0(@Nullable String message, @Nullable Throwable e) {
         log.info(message, e);
     }
 
     @Override
-    protected void warning0(@Nullable String message) {
+    public void warning0(@Nullable String message) {
         log.warn(message);
     }
 
     @Override
-    protected void warning0(@Nullable String message, @Nullable Throwable e) {
+    public void warning0(@Nullable String message, @Nullable Throwable e) {
         log.warn(message, e);
     }
 
     @Override
-    protected void error0(@Nullable String message) {
+    public void error0(@Nullable String message) {
         log.error(message);
     }
 
     @Override
-    protected void error0(@Nullable String message, @Nullable Throwable e) {
+    public void error0(@Nullable String message, @Nullable Throwable e) {
         log.error(message, e);
     }
 
     @Override
-    protected void debug0(@Nullable String message) {
+    public void debug0(@Nullable String message) {
         log.debug(message);
     }
 
     @Override
-    protected void debug0(@Nullable String message, @Nullable Throwable e) {
+    public void debug0(@Nullable String message, @Nullable Throwable e) {
         log.debug(message, e);
     }
 
     @Override
-    protected void verbose0(@Nullable String message) {
+    public void verbose0(@Nullable String message) {
         log.debug(message);
     }
 
     @Override
-    protected void verbose0(@Nullable String message, @Nullable Throwable e) {
+    public void verbose0(@Nullable String message, @Nullable Throwable e) {
         log.debug(message, e);
     }
 }
