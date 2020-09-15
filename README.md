@@ -5,7 +5,7 @@
     * clone并执行mvn clean install。
     * 创建空的springboot项目并引用依赖。
     * 在启动类上加注解@EnableMiraiPlus。
-    * 注意，由于kotlin版本依赖关系，需要你使用继承方式依赖mirai-plus
+    * 注意，由于mirai与springboot中kotlin版本依赖关系，需要你使用继承方式依赖mirai-plus
         ```
         <parent>
             <groupId>com.zhuangxv</groupId>
