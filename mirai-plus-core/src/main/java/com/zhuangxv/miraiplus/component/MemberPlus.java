@@ -32,8 +32,15 @@ public class MemberPlus {
      * 获取群成员名片
      */
     public String getNameCard() {
-        MemberPermission permission = this.member.getPermission();
         return this.member.getNameCard();
+    }
+
+    /**
+     * 设置群成员名片
+     * @param nameCard 名片
+     */
+    public void setNameCard(String nameCard) {
+        this.member.setNameCard(nameCard);
     }
 
     /**
