@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author xiaoxu
  * @date 2020/10/15
  **/
-@EnableMiraiPlus
+@EnableMiraiPlus(scanBasePackages = {"com.zhuangxv.miraiplus.handler"})
 @SpringBootApplication
 public class MiraiPlusApplication {
 
