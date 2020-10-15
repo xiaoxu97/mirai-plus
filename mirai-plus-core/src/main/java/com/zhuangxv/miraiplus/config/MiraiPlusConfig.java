@@ -26,6 +26,11 @@ public class MiraiPlusConfig {
     private String deviceInfoPath;
 
     /**
+     * 机器人缓存目录
+     */
+    private String tempPath;
+
+    /**
      * 心跳周期
      */
     private Long heartbeatPeriodMillis = 60 * 1000L;

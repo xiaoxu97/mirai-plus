@@ -1,5 +1,6 @@
 package com.zhuangxv.miraiplus.component;
 
+import com.zhuangxv.miraiplus.config.MiraiPlusConfig;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Friend;
 
@@ -17,8 +18,18 @@ public class BotPlus {
 
     private String botName;
 
+    private MiraiPlusConfig miraiPlusConfig;
+
     protected BotPlus(Bot bot) {
         this.bot = bot;
+    }
+
+    protected void setBotConfig(MiraiPlusConfig miraiPlusConfig) {
+        this.miraiPlusConfig = miraiPlusConfig;
+    }
+
+    public MiraiPlusConfig getBotConfig() {
+        return this.miraiPlusConfig;
     }
 
     public String getBotName() {

@@ -1,6 +1,7 @@
 package com.zhuangxv.miraiplus.injector.parameter;
 
 import com.zhuangxv.miraiplus.component.BotPlus;
+import com.zhuangxv.miraiplus.component.BotPlusFactory;
 import com.zhuangxv.miraiplus.component.MiraiPlusThreadLocal;
 import com.zhuangxv.miraiplus.component.PlusObjectFactory;
 import com.zhuangxv.miraiplus.injector.ObjectInjector;
@@ -16,6 +17,6 @@ public class BotPlusInjector implements ObjectInjector<BotPlus> {
     @Override
     public BotPlus getObject() {
         MessageEvent event = MiraiPlusThreadLocal.messageEvent.get();
-        return PlusObjectFactory.getBotPlus(event.getBot());
+        return BotPlusFactory.getBotPlus(event.getBot().getId());
     }
 }

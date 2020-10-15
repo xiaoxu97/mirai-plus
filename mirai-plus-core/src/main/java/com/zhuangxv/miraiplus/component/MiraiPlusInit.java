@@ -47,9 +47,11 @@ public class MiraiPlusInit implements CommandLineRunner {
                 }
             });
             bot.login();
+            new File(v.getTempPath()).mkdirs();
             BotPlusFactory.setBotPlus(new BotPlus(bot) {
                 {
                     setBotName(v.getBotName());
+                    setBotConfig(v);
                 }
             });
             Events.registerEvents(bot, this.dispatcher);

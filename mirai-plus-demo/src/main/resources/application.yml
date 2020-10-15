@@ -1,0 +1,5 @@
+mirai-plus:
+  - botName: 小旭
+    botQQ: 123456
+    botPassword: 123456
+    deviceInfoPath: deviceInfo.json
