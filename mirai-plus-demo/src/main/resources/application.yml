@@ -3,3 +3,4 @@ mirai-plus:
     botQQ: 123456
     botPassword: 123456
     deviceInfoPath: deviceInfo.json
+    tempPath: d:\temp
