@@ -11,7 +11,6 @@
         <module>mirai-plus</module>
         <module>mirai-plus-annotation</module>
         <module>mirai-plus-core</module>
-        <module>mirai-plus-demo</module>
     </modules>
     <packaging>pom</packaging>
 
