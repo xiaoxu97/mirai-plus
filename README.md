@@ -1,6 +1,6 @@
 # MIRAI-PLUS
-## ※本项目基于mirai进行java二次开发，旨在简化java用户的开发。
 ## ※本项目已停止开发，新框架https://github.com/go-cqhttp/java
+## ※本项目基于mirai进行java二次开发，旨在简化java用户的开发。
 ## 源地址https://github.com/mamoe/mirai
 ### 许可证
 
